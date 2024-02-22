@@ -21,17 +21,15 @@ class ServerCommunication:
 
     def send_request_to_node(self, state):
         """Send state update request to the Node.js server."""
-        url = f"http://{self.server_address}:{self.server_port}/motion-detected"
+        url = f"http://{self.server_address}:{self.server_port}/api-sensors/motion-detected"
         payload = {"state": state}
+        headers = {'Content-Type': 'application/json'}  # Explicitly set the Content-Type
         print(f"Sending request to {url} with payload: {payload}")  # Diagnostic log
         try:
-            response = requests.post(url, json=payload, timeout=5)
+            response = requests.post(url, json=payload, headers=headers, timeout=5)  # Include headers if needed
             if response.status_code == 200:
                 print(f"Light {state} request successful: {response.status_code}")
-                return True
             else:
                 print(f"Request failed with status code: {response.status_code}, response: {response.text}")
-                return False
         except requests.exceptions.RequestException as e:
             print(f"Request to Node.js server failed: {e}")
-            return False
