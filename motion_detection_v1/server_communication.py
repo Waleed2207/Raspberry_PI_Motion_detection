@@ -20,6 +20,7 @@ class ServerCommunication:
                 return False
 
     def send_request_to_node(self, state):
+        """Send state update request to the Node.js server."""
         url = f"http://{self.server_address}:{self.server_port}/motion-detected"
         payload = {"state": state}
         print(f"Sending request to {url} with payload: {payload}")  # Diagnostic log
