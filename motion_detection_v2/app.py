@@ -49,13 +49,13 @@ def monitor_pir(device_manager, manual_control_flag, server_communication, senso
                 if not motion_detected:
                     print("Motion detected")
                     motion_detected = True
-                    device_manager.led_relay_on()
+                    device_manager.led_relay_off()
                     server_communication.send_request_to_node("on", sensor_id)  # Include sensor_id
                 last_motion_time = time.time()
 
             elif motion_detected and (time.time() - last_motion_time) > 10 and not manual_control_flag.is_set():
                 print("No motion detected for 10 seconds")
-                device_manager.led_relay_off()
+                device_manager.led_relay_on()
                 motion_detected = False
                 server_communication.send_request_to_node("off", sensor_id)  # Include sensor_id
 
