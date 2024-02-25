@@ -63,7 +63,9 @@ def monitor_pir(device_manager, manual_control_flag, server_communication, senso
             print(f"Caught RuntimeError during PIR monitoring: {e}")
         time.sleep(0.1)
 
+sensor_id = "247"  # Define your sensor ID here
+
 if __name__ == '__main__':
-    # Start the monitor_pir thread with required arguments including server_communication
-    threading.Thread(target=monitor_pir, args=(device_manager, manual_control_flag, server_communication), daemon=True).start()
+    # Start the monitor_pir thread with required arguments including server_communication and sensor_id
+    threading.Thread(target=monitor_pir, args=(device_manager, manual_control_flag, server_communication, sensor_id), daemon=True).start()
     app.run(debug=False, host='0.0.0.0', port=5009)
